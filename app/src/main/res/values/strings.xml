@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RestaurantFinder</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="send_otp">SEND OTP</string>
+</resources>
