@@ -21,7 +21,9 @@
             android:layout_height="@dimen/size_30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/location" />
+            android:layout_marginEnd="@dimen/size_2dp"
+            android:src="@drawable/location"
+            android:layout_marginRight="@dimen/size_2dp" />
 
         <EditText
             android:id="@+id/et_location"
