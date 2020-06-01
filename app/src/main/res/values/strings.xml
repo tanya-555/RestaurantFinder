@@ -2,4 +2,9 @@
     <string name="app_name">RestaurantFinder</string>
     <string name="enter_mobile_number">Enter mobile number</string>
     <string name="send_otp">SEND OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify">VERIFY</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="text_continue">CONTINUE</string>
+    <string name="enter_city">Enter city</string>
 </resources>
