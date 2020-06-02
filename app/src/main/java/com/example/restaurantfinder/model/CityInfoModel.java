@@ -1,6 +1,7 @@
 package com.example.restaurantfinder.model;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,9 +29,14 @@ public class CityInfoModel implements SelectCityContract.Model {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        int city_id;
                         try {
-                            int city_id = response.getJSONArray("location_suggestions").
-                                    getJSONObject(0).getInt("id");
+                            if(response.getJSONArray("location_suggestions").length() == 0) {
+                                city_id = 0;
+                            } else {
+                                city_id = response.getJSONArray("location_suggestions").
+                                        getJSONObject(0).getInt("id");
+                            }
                             listener.onFinished(city_id);
                         } catch (JSONException e) {
                             e.printStackTrace();

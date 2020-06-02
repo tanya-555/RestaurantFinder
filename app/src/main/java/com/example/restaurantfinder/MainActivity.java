@@ -17,7 +17,6 @@ import com.example.restaurantfinder.di.SharedPrefModule;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 

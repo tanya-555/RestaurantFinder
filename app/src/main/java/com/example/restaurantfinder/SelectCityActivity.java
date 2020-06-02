@@ -85,7 +85,11 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
 
     @Override
     public void onDataFetched(int cityId) {
-        Toast.makeText(this, String.valueOf(cityId), Toast.LENGTH_LONG).show();
+        if(cityId == 0) {
+            Toast.makeText(this, "No Results Found!", Toast.LENGTH_LONG).show();
+        } else {
+
+        }
     }
 
     @Override
