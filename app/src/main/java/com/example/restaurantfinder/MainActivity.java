@@ -5,16 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.restaurantfinder.databinding.ActivityMainBinding;
+import com.example.restaurantfinder.di.DaggerSharedPrefComponent;
+import com.example.restaurantfinder.di.SharedPrefModule;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,13 +31,28 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
     private static final int REQUEST_CODE = 1000;
 
+    @Inject
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         disposable = new CompositeDisposable();
+        DaggerSharedPrefComponent.builder().sharedPrefModule(
+                new SharedPrefModule(getApplicationContext())).build().inject(this);
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_main, null, false);
         setContentView(binding.getRoot());
+        initSharedPreferences();
         setListener();
+        isLoggedIn();
+    }
+
+    private void initSharedPreferences() {
+        if (!sharedPreferences.contains("is_login")) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("is_login", false);
+            editor.apply();
+        }
     }
 
     private void setListener() {
@@ -63,10 +83,21 @@ public class MainActivity extends AppCompatActivity {
             boolean otpVerification = Objects.requireNonNull(data.getExtras()).getBoolean("isOTPVerified");
             if(otpVerification) {
                 Log.d(TAG, "Verification completed");
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("is_login", true);
+                editor.apply();
                 Intent intent = new Intent(MainActivity.this, SelectCityActivity.class);
                 startActivity(intent);
                 finish();
             }
+        }
+    }
+
+    private void isLoggedIn() {
+        if(sharedPreferences.getBoolean("is_login", false)) {
+            Intent intent = new Intent(MainActivity.this, SelectCityActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
