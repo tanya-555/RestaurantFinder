@@ -1,5 +1,6 @@
 package com.example.restaurantfinder;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -88,7 +89,8 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
         if(cityId == 0) {
             Toast.makeText(this, "No Results Found!", Toast.LENGTH_LONG).show();
         } else {
-
+            Intent intent = new Intent(SelectCityActivity.this, LandingActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".OTPActivity" />
         <activity android:name=".SelectCityActivity" />
+        <activity android:name=".LandingActivity" />
     </application>
 
 </manifest>

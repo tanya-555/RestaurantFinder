@@ -1,7 +1,6 @@
 package com.example.restaurantfinder.model;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
