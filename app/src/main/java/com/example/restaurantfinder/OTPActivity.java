@@ -37,6 +37,7 @@ public class OTPActivity extends AppCompatActivity {
     private String verificationId;
     private ProgressDialog progressDialog;
     private boolean isOTPVerified = false;
+    private String mobile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +47,8 @@ public class OTPActivity extends AppCompatActivity {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.otp_activity, null, false);
         setContentView(binding.getRoot());
         initListener();
-        sendVerificationCode(getIntent().getStringExtra("mobile"));
+        mobile = getIntent().getStringExtra("mobile");
+        sendVerificationCode(mobile);
     }
 
     private void initListener() {
@@ -62,7 +64,7 @@ public class OTPActivity extends AppCompatActivity {
                 .throttleFirst(60, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-
+                    sendVerificationCode(mobile);
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));
                 }));
@@ -72,7 +74,7 @@ public class OTPActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(binding.tvOtp.getText().toString())) {
             Toast.makeText(this, "Please enter OTP!", Toast.LENGTH_LONG).show();
         } else {
-
+            verifyVerificationCode(verificationId);
         }
     }
 
