@@ -14,7 +14,8 @@ public class SelectCityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.select_city_layout,null, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(),
+                R.layout.select_city_layout,null, false);
         setContentView(binding.getRoot());
     }
 }
