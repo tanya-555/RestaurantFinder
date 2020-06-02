@@ -1,5 +1,6 @@
 package com.example.restaurantfinder;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -51,6 +52,21 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_CODE);
         } else {
             Toast.makeText(this, "Enter a valid mobile number", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            assert data != null;
+            boolean otpVerification = Objects.requireNonNull(data.getExtras()).getBoolean("isOTPVerified");
+            if(otpVerification) {
+                Log.d(TAG, "Verification completed");
+                Intent intent = new Intent(MainActivity.this, SelectCityActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
