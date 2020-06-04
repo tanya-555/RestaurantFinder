@@ -1,6 +1,6 @@
 package com.example.restaurantfinder.model;
 
-public class CollectionModel {
+public class CollectionResponse {
 
     private String title;
 
@@ -19,7 +19,7 @@ public class CollectionModel {
     private String imageUrl;
     private String description;
 
-    public CollectionModel(String title, String imageUrl, String description) {
+    public CollectionResponse(String title, String imageUrl, String description) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;

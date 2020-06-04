@@ -89,6 +89,9 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
         if(cityId == 0) {
             Toast.makeText(this, "No Results Found!", Toast.LENGTH_LONG).show();
         } else {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("city_id", cityId);
+            editor.apply();
             Intent intent = new Intent(SelectCityActivity.this, LandingActivity.class);
             startActivity(intent);
         }
@@ -109,6 +112,9 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
         if(TextUtils.isEmpty(binding.etLocation.getText().toString())) {
             Toast.makeText(this, "Enter a city name!", Toast.LENGTH_LONG).show();
         } else {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("selected_city", binding.etLocation.getText().toString());
+            editor.apply();
             getPresenter().fetchData(queue, binding.etLocation.getText().toString());
         }
     }
