@@ -11,6 +11,7 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
 
 
     private CollectionInfoModel model;
+    private CollectionsContract.View attachedView;
 
     public LandingPresenter() {
         model = new CollectionInfoModel();
@@ -18,22 +19,34 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
 
     @Override
     public void onFinished(List<CollectionResponse> collectionList) {
-        if(isViewAttached()) {
-            getView().setData(collectionList);
-            getView().showContent();
+        if(attachedView != null) {
+            attachedView.setData(collectionList);
+            attachedView.showContent();
         }
     }
 
     @Override
+    public void attachView(CollectionsContract.View view) {
+        super.attachView(view);
+        attachedView = view;
+    }
+
+    @Override
+    public void detachView() {
+        super.detachView();
+        attachedView = null;
+    }
+
+    @Override
     public void onFailed(Throwable t) {
-        if(isViewAttached()) {
-            getView().showError(t, false);
+        if(attachedView != null) {
+            attachedView.showError(t, false);
         }
     }
 
     @Override
     public void fetchCollections(RequestQueue queue, int cityId) {
-        getView().showLoading(false);
+        attachedView.showLoading(false);
         callApi(queue, cityId);
     }
 

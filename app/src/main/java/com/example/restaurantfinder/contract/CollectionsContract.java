@@ -22,7 +22,7 @@ public interface CollectionsContract {
     interface View extends MvpLceView<List<CollectionResponse>> {
     }
 
-    public abstract class Presenter extends MvpBasePresenter<View> {
+    abstract class Presenter extends MvpBasePresenter<View> {
         public abstract void fetchCollections(RequestQueue queue, int cityId);
     }
 }
