@@ -33,10 +33,12 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/iv_location"
                 android:layout_toRightOf="@+id/iv_location"
+                android:inputType="textAutoComplete"
                 android:hint="@string/enter_city"
                 android:padding="@dimen/size_10dp"
                 android:textColor="@color/color_white"
                 android:textColorHint="@color/color_white"
+                android:imeOptions="actionDone"
                 android:textStyle="italic" />
 
             <Button
