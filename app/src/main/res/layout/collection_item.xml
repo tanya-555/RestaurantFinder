@@ -12,12 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_black"
-        android:padding="@dimen/size_20dp">
+        android:padding="@dimen/size_20dp"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginBottom="@dimen/size_10dp"
+        android:layout_marginStart="@dimen/size_10dp"
+        android:layout_marginEnd="@dimen/size_10dp">
 
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="400dp"
-            android:layout_height="200dp" />
+            android:layout_width="@dimen/size_400dp"
+            android:layout_height="@dimen/size_200dp" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -35,8 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/size_5dp"
             android:text="@{collection.description}"
             android:textColor="@color/color_white"
+            android:textStyle="italic"
             android:textSize="@dimen/size_10dp" />
 
     </RelativeLayout>

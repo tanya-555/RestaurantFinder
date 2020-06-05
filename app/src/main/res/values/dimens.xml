@@ -9,4 +9,6 @@
     <dimen name="size_30dp">30dp</dimen>
     <dimen name="size_50dp">50dp</dimen>
     <dimen name="size_2dp">2dp</dimen>
+    <dimen name="size_400dp">400dp</dimen>
+    <dimen name="size_200dp">200dp</dimen>
 </resources>
