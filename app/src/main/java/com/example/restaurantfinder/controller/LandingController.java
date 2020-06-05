@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -28,13 +27,13 @@ import java.util.Objects;
 public class LandingController extends MvpLceController<SwipeRefreshLayout, List<CollectionResponse>,
                                            CollectionsContract.View, LandingPresenter> implements  CollectionsContract.View, SwipeRefreshLayout.OnRefreshListener{
 
-    private List<CollectionResponse> collectionList;
     private Bundle bundle;
     private LandingControllerBinding binding;
     private int cityId;
     private RequestQueue queue;
     private CollectionsAdapter adapter;
     private RecyclerView recyclerView;
+    private List<CollectionResponse> collectionList;
 
     public LandingController(Bundle bundle) {
         super(bundle);
@@ -58,7 +57,9 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     @Override
     protected void onAttach(@NonNull View view) {
         super.onAttach(view);
-        loadData(true);
+        binding.contentView.setOnRefreshListener(this);
+        initGridView();
+        loadData(false);
     }
 
     @Override
@@ -79,16 +80,12 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     }
 
     @Override
-    public void onRefresh() {
-        loadData(true);
-    }
-
-    @Override
     public void setData(List<CollectionResponse> data) {
         collectionList = data;
-        String val = String.valueOf(collectionList.size());
+        String val = String.valueOf(data.size());
         Toast.makeText(getActivity(), val, Toast.LENGTH_LONG).show();
-        initGridView();
+        adapter.setData(data);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -106,11 +103,26 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
         return binding.loadingView.getId();
     }
 
+    @Override
+    public void showLoading(boolean pullToRefresh) {
+        super.showLoading(pullToRefresh);
+    }
+
+    @Override
+    public void showContent() {
+        super.showContent();
+    }
+
     private void initGridView() {
-        adapter = new CollectionsAdapter(collectionList, getActivity());
+        adapter = new CollectionsAdapter(getActivity());
         recyclerView = binding.contentView.findViewById(R.id.rv_collections);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        loadData(true);
     }
 }

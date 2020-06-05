@@ -22,7 +22,7 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsViewHold
     private Context context;
     private CollectionItemBinding binding;
 
-    public CollectionsAdapter(List<CollectionResponse> collectionList, Context context) {
+    public CollectionsAdapter(Context context) {
         this.collectionList = collectionList;
         this.context = context;
     }
@@ -44,5 +44,9 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsViewHold
     @Override
     public int getItemCount() {
         return collectionList.size();
+    }
+
+    public void setData(List<CollectionResponse> collectionList) {
+        this.collectionList = collectionList;
     }
 }
