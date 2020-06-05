@@ -63,7 +63,7 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
 
     private void initListener() {
         disposable.add(RxView.clicks(binding.btnSearch)
-                  .throttleFirst(60, TimeUnit.SECONDS)
+                  .throttleFirst(5, TimeUnit.SECONDS)
                   .observeOn(AndroidSchedulers.mainThread())
                   .subscribe(s -> {
                       loadData();
