@@ -20,7 +20,7 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
     @Override
     public void onFinished(List<CollectionResponse> collectionList) {
         if(isViewAttached()) {
-            getView().setData(collectionList);
+            getView().setData(collectionList.subList(0,9));
             getView().showContent();
         }
     }
