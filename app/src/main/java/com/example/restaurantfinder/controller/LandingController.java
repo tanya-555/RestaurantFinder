@@ -81,6 +81,7 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
 
     @Override
     public void setData(List<CollectionResponse> data) {
+        binding.contentView.setRefreshing(false);
         collectionList = data;
         String val = String.valueOf(data.size());
         Toast.makeText(getActivity(), val, Toast.LENGTH_LONG).show();
@@ -123,6 +124,7 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
 
     @Override
     public void onRefresh() {
-        loadData(true);
+        collectionList.clear();
+        loadData(false);
     }
 }
