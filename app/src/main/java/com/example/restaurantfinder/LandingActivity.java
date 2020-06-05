@@ -1,13 +1,16 @@
 package com.example.restaurantfinder;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 
 import com.bluelinelabs.conductor.Conductor;
 import com.bluelinelabs.conductor.Router;
@@ -34,6 +37,7 @@ public class LandingActivity extends AppCompatActivity {
     private Router router;
     private int cityId;
     private ImageView backBtn;
+    private ImageView optionsBtn;
     private CompositeDisposable disposable;
 
     @Override
@@ -42,6 +46,7 @@ public class LandingActivity extends AppCompatActivity {
         setContentView(R.layout.landing_activity);
         router = Conductor.attachRouter(LandingActivity.this, findViewById(R.id.router), savedInstanceState);
         backBtn = findViewById(R.id.iv_back);
+        optionsBtn = findViewById(R.id.iv_options);
         disposable = new CompositeDisposable();
         DaggerSharedPrefComponent.builder().sharedPrefModule(
                 new SharedPrefModule(getApplicationContext())).build().inject(this);
@@ -64,16 +69,51 @@ public class LandingActivity extends AppCompatActivity {
 
     private void initListener() {
         disposable.add(RxView.clicks(backBtn).observeOn(AndroidSchedulers.mainThread())
-                  .subscribe(s -> {
-                      this.finish();
-                  }, e -> {
-                      Log.d(TAG, Objects.requireNonNull(e.getMessage()));
-                  }));
+                .subscribe(s -> {
+                    this.finish();
+                }, e -> {
+                    Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                }));
+        disposable.add(RxView.clicks(optionsBtn).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    showPopupMenu();
+                    //this.finish();
+                }, e -> {
+                    Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                }));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         disposable.dispose();
+    }
+
+    private void showPopupMenu() {
+        PopupMenu menu = new PopupMenu(LandingActivity.this, optionsBtn);
+        menu.getMenuInflater().inflate(R.menu.menu, menu.getMenu());
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if ("Logout".contentEquals(item.getTitle())) {
+                    clearPreferences();
+                    goToMainActivity();
+                    LandingActivity.this.finish();
+                }
+                return true;
+            }
+        });
+        menu.show();
+    }
+
+    private void clearPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    private void goToMainActivity() {
+        Intent intent = new Intent(LandingActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
