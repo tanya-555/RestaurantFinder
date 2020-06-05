@@ -1,5 +1,6 @@
 package com.example.restaurantfinder.di;
 
+import com.example.restaurantfinder.LandingActivity;
 import com.example.restaurantfinder.MainActivity;
 import com.example.restaurantfinder.SelectCityActivity;
 
@@ -13,4 +14,6 @@ public interface SharedPrefComponent {
     void inject(MainActivity mainActivity);
 
     void inject(SelectCityActivity selectCityActivity);
+
+    void inject(LandingActivity landingActivity);
 }

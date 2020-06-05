@@ -19,13 +19,10 @@ public interface CollectionsContract {
         }
     }
 
-    interface View extends MvpLceView<CollectionResponse> {
-        void onCollectionsFetched(List<CollectionResponse> collectionList);
-
-        void onResponseError(Throwable t);
+    interface View extends MvpLceView<List<CollectionResponse>> {
     }
 
     public abstract class Presenter extends MvpBasePresenter<View> {
-        public abstract void fetchCollections(RequestQueue queue, int cityId);
+        public abstract void fetchCollections(RequestQueue queue, int cityId, boolean pullToRefresh);
     }
 }
