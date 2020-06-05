@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,11 +23,12 @@ import com.example.restaurantfinder.model.CollectionResponse;
 import com.example.restaurantfinder.presenter.LandingPresenter;
 import com.hannesdorfmann.mosby3.mvp.conductor.lce.MvpLceController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LandingController extends MvpLceController<SwipeRefreshLayout, List<CollectionResponse>,
-                                           CollectionsContract.View, LandingPresenter> implements  CollectionsContract.View, SwipeRefreshLayout.OnRefreshListener{
+public class LandingController extends MvpLceController<LinearLayout, List<CollectionResponse>,
+                                           CollectionsContract.View, LandingPresenter> implements  CollectionsContract.View {
 
     private Bundle bundle;
     private LandingControllerBinding binding;
@@ -51,6 +53,7 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         binding = LandingControllerBinding.inflate(inflater, container, false);
         cityId = bundle.getInt("city_id");
+        collectionList = new ArrayList<>();
         queue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
         return binding.getRoot();
     }
@@ -58,7 +61,6 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     @Override
     protected void onAttach(@NonNull View view) {
         super.onAttach(view);
-        binding.contentView.setOnRefreshListener(this);
         initGridView();
         loadData(false);
     }
@@ -66,7 +68,6 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     @Override
     protected void onDetach(@NonNull View view) {
         super.onDetach(view);
-        collectionList.clear();
     }
 
     @NonNull
@@ -77,15 +78,13 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.fetchCollections(queue, cityId, pullToRefresh);
+        presenter.fetchCollections(queue, cityId);
     }
 
     @Override
     public void setData(List<CollectionResponse> data) {
-        binding.contentView.setRefreshing(false);
-        collectionList = data;
-        String val = String.valueOf(data.size());
-        Toast.makeText(getActivity(), val, Toast.LENGTH_LONG).show();
+        collectionList.clear();
+        collectionList.addAll(data);
         adapter.setData(data);
         adapter.notifyDataSetChanged();
     }
@@ -120,11 +119,5 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
         recyclerView = binding.contentView.findViewById(R.id.rv_collections);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onRefresh() {
-        collectionList.clear();
-        loadData(false);
     }
 }

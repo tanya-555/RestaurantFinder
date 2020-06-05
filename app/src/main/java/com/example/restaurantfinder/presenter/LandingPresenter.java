@@ -11,7 +11,6 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
 
 
     private CollectionInfoModel model;
-    private boolean pullToRefresh;
 
     public LandingPresenter() {
         model = new CollectionInfoModel();
@@ -20,7 +19,7 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
     @Override
     public void onFinished(List<CollectionResponse> collectionList) {
         if(isViewAttached()) {
-            getView().setData(collectionList.subList(0,9));
+            getView().setData(collectionList);
             getView().showContent();
         }
     }
@@ -28,14 +27,13 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
     @Override
     public void onFailed(Throwable t) {
         if(isViewAttached()) {
-            getView().showError(t, pullToRefresh);
+            getView().showError(t, false);
         }
     }
 
     @Override
-    public void fetchCollections(RequestQueue queue, int cityId, boolean pullToRefresh) {
-        this.pullToRefresh = pullToRefresh;
-        getView().showLoading(pullToRefresh);
+    public void fetchCollections(RequestQueue queue, int cityId) {
+        getView().showLoading(false);
         callApi(queue, cityId);
     }
 

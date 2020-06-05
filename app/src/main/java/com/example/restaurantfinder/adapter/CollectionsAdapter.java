@@ -14,31 +14,32 @@ import com.example.restaurantfinder.databinding.CollectionItemBinding;
 import com.example.restaurantfinder.model.CollectionResponse;
 import com.example.restaurantfinder.view_holder.CollectionsViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsViewHolder> {
 
-    private List<CollectionResponse> collectionList;
+    private List<CollectionResponse> collectionList = new ArrayList<>();
     private Context context;
     private CollectionItemBinding binding;
 
     public CollectionsAdapter(Context context) {
-        this.collectionList = collectionList;
         this.context = context;
     }
 
     @NonNull
     @Override
     public CollectionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = CollectionItemBinding.inflate(LayoutInflater.from(context));
+        binding = CollectionItemBinding.inflate(LayoutInflater.from(context),parent,false);
         return new CollectionsViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CollectionsViewHolder holder, int position) {
+    public void onBindViewHolder(final CollectionsViewHolder holder, int position) {
         CollectionResponse model = collectionList.get(position);
         holder.bindData(model);
-        Glide.with(context).load(model.getImageUrl()).into(binding.ivImage);
+        Glide.with(context).load(model.getImageUrl())
+                .apply(new RequestOptions().centerCrop()).into(holder.collectionImage);
     }
 
     @Override

@@ -23,6 +23,6 @@ public interface CollectionsContract {
     }
 
     public abstract class Presenter extends MvpBasePresenter<View> {
-        public abstract void fetchCollections(RequestQueue queue, int cityId, boolean pullToRefresh);
+        public abstract void fetchCollections(RequestQueue queue, int cityId);
     }
 }
