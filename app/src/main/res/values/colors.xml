@@ -7,4 +7,5 @@
     <color name="color_text_hint">#7ba39f</color>
     <color name="color_black">#000000</color>
     <color name="color_black_bg">#10100e</color>
+    <color name="color_toolbar_bg">#ac2e2e</color>
 </resources>

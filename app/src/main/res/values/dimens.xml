@@ -11,4 +11,6 @@
     <dimen name="size_2dp">2dp</dimen>
     <dimen name="size_400dp">400dp</dimen>
     <dimen name="size_200dp">200dp</dimen>
+    <dimen name="size_15dp">15dp</dimen>
+    <dimen name="size_180dp">180dp</dimen>
 </resources>
