@@ -8,11 +8,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.restaurantfinder.R;
+import com.example.restaurantfinder.adapter.CollectionsAdapter;
 import com.example.restaurantfinder.contract.CollectionsContract;
 import com.example.restaurantfinder.databinding.LandingControllerBinding;
 import com.example.restaurantfinder.model.CollectionResponse;
@@ -20,6 +23,7 @@ import com.example.restaurantfinder.presenter.LandingPresenter;
 import com.hannesdorfmann.mosby3.mvp.conductor.lce.MvpLceController;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LandingController extends MvpLceController<SwipeRefreshLayout, List<CollectionResponse>,
                                            CollectionsContract.View, LandingPresenter> implements  CollectionsContract.View, SwipeRefreshLayout.OnRefreshListener{
@@ -29,6 +33,8 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     private LandingControllerBinding binding;
     private int cityId;
     private RequestQueue queue;
+    private CollectionsAdapter adapter;
+    private RecyclerView recyclerView;
 
     public LandingController(Bundle bundle) {
         super(bundle);
@@ -45,7 +51,7 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         binding = LandingControllerBinding.inflate(inflater, container, false);
         cityId = bundle.getInt("city_id");
-        queue = Volley.newRequestQueue(getApplicationContext());
+        queue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
         return binding.getRoot();
     }
 
@@ -82,6 +88,7 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
         collectionList = data;
         String val = String.valueOf(collectionList.size());
         Toast.makeText(getActivity(), val, Toast.LENGTH_LONG).show();
+        initGridView();
     }
 
     @Override
@@ -97,5 +104,13 @@ public class LandingController extends MvpLceController<SwipeRefreshLayout, List
     @Override
     protected int getLoadingViewId() {
         return binding.loadingView.getId();
+    }
+
+    private void initGridView() {
+        adapter = new CollectionsAdapter(collectionList, getActivity());
+        recyclerView = binding.contentView.findViewById(R.id.rv_collections);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setAdapter(adapter);
     }
 }
