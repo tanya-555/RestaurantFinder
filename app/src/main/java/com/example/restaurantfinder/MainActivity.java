@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         disposable = new CompositeDisposable();
         DaggerSharedPrefComponent.builder().sharedPrefModule(
                 new SharedPrefModule(getApplicationContext())).build().inject(this);
+        isLoggedIn();
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_main, null, false);
         setContentView(binding.getRoot());
         initSharedPreferences();
         setListener();
-        isLoggedIn();
     }
 
     private void initSharedPreferences() {
