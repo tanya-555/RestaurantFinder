@@ -37,7 +37,7 @@ public class SearchInfoModel implements ListingContract.Model {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getJSONArray("restaurants").length() > 0){
-                                getSearchList(response.getJSONObject("restaurants").getJSONArray("restaurant"));
+                                getSearchList(response.getJSONArray("restaurants"));
                                 listener.onFinished(searchList);
                             }
                         } catch (JSONException e) {
@@ -64,7 +64,7 @@ public class SearchInfoModel implements ListingContract.Model {
 
     private void getSearchList(JSONArray array) throws JSONException {
         for(int i =0; i< array.length(); i++) {
-            JSONObject rest = array.getJSONObject(i);
+            JSONObject rest = array.getJSONObject(i).getJSONObject("restaurant");
             String name = rest.getString("name");
             String rating = rest.getJSONObject("user_rating").getString("aggregate_rating");
             String ratingColor = rest.getJSONObject("user_rating").getString("rating_color");

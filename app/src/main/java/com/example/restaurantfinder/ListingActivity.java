@@ -26,6 +26,7 @@ public class ListingActivity extends AppCompatActivity {
     private ImageView backBtn;
     private ImageView sortBtn;
     private CompositeDisposable disposable;
+    private ListingController controller;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +42,16 @@ public class ListingActivity extends AppCompatActivity {
 
     private void launchListingController() {
         Bundle bundle = new Bundle(getIntent().getExtras());
-        router.pushController(RouterTransaction.with(new ListingController(bundle)));
+        controller = new ListingController(bundle);
+        router.pushController(RouterTransaction.with(controller));
     }
 
     private void initListener() {
         disposable.add(RxView.clicks(backBtn).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
+                    if(controller != null) {
+                        router.popController(controller);
+                    }
                     this.finish();
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));

@@ -9,7 +9,7 @@
             type="com.example.restaurantfinder.model.SearchResponse" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,7 +78,7 @@
                 android:layout_marginLeft="60dp"
                 android:text="@{search.cuisines}"
                 android:textColor="@color/color_white"
-                android:textSize="14dp"
+                android:textSize="@dimen/size_14dp"
                 tools:text="Chinese, Indian" />
 
         </RelativeLayout>

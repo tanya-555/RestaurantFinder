@@ -13,4 +13,5 @@
     <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_15dp">15dp</dimen>
     <dimen name="size_180dp">180dp</dimen>
+    <dimen name="size_14dp">14dp</dimen>
 </resources>

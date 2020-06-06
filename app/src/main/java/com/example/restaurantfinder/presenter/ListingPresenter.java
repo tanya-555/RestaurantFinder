@@ -17,9 +17,9 @@ public class ListingPresenter extends ListingContract.Presenter implements Listi
     }
 
     @Override
-    public void onFinished(List<SearchResponse> collectionList) {
+    public void onFinished(List<SearchResponse> searchResponseList) {
         if(attachedView != null) {
-            attachedView.setData(collectionList);
+            attachedView.setData(searchResponseList);
             attachedView.showContent();
         }
     }
@@ -32,7 +32,7 @@ public class ListingPresenter extends ListingContract.Presenter implements Listi
     }
 
     @Override
-    public void fetchCollections(RequestQueue queue, int cityId, int collectionId, String order) {
+    public void fetchData(RequestQueue queue, int cityId, int collectionId, String order) {
         attachedView.showLoading(false);
         callApi(queue, cityId, collectionId, order);
     }

@@ -13,7 +13,7 @@ public interface ListingContract {
         void getData(RequestQueue queue, int cityId, int collectionId, String order, onFinishedListener listener);
 
         interface onFinishedListener {
-            void onFinished(List<SearchResponse> collectionList);
+            void onFinished(List<SearchResponse> searchResponseList);
 
             void onFailed(Throwable t);
         }
@@ -23,6 +23,6 @@ public interface ListingContract {
     }
 
     abstract class Presenter extends MvpBasePresenter<View> {
-        public abstract void fetchCollections(RequestQueue queue, int cityId, int collectionId, String order);
+        public abstract void fetchData(RequestQueue queue, int cityId, int collectionId, String order);
     }
 }

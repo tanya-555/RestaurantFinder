@@ -14,12 +14,13 @@ import com.example.restaurantfinder.model.SearchResponse;
 import com.example.restaurantfinder.view_holder.SearchViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     private Context context;
     private SearchItemBinding binding;
-    private ArrayList<SearchResponse> searchList;
+    private List<SearchResponse> searchList;
 
     public SearchAdapter(Context context) {
         this.context = context;
@@ -46,7 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
         return searchList.size();
     }
 
-    public void setList(ArrayList<SearchResponse> searchList) {
+    public void setList(List<SearchResponse> searchList) {
         this.searchList = searchList;
     }
 }
