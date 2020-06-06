@@ -65,7 +65,8 @@ public class CollectionInfoModel implements CollectionsContract.Model {
             String title = array.getJSONObject(i).getJSONObject("collection").getString("title");
             String imageUrl = array.getJSONObject(i).getJSONObject("collection").getString("image_url");
             String description = array.getJSONObject(i).getJSONObject("collection").getString("description");
-            CollectionResponse response = new CollectionResponse(title,imageUrl,description);
+            int collectionId = array.getJSONObject(i).getJSONObject("collection").getInt("collection_id");
+            CollectionResponse response = new CollectionResponse(title,imageUrl,description,collectionId);
             collectionList.add(response);
         }
     }
