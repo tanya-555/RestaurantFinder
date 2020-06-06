@@ -1,6 +1,7 @@
 package com.example.restaurantfinder.controller;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -27,8 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
+
 public class LandingController extends MvpLceController<LinearLayout, List<CollectionResponse>,
                                            CollectionsContract.View, LandingPresenter> implements  CollectionsContract.View {
+
+    private static final String TAG = LandingController.class.getName();
 
     private Bundle bundle;
     private LandingControllerBinding binding;
@@ -37,6 +43,7 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
     private CollectionsAdapter adapter;
     private RecyclerView recyclerView;
     private List<CollectionResponse> collectionList;
+    private CompositeDisposable disposable;
 
     public LandingController(Bundle bundle) {
         super(bundle);
@@ -54,6 +61,7 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
         binding = LandingControllerBinding.inflate(inflater, container, false);
         cityId = bundle.getInt("city_id");
         collectionList = new ArrayList<>();
+        disposable = new CompositeDisposable();
         queue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
         return binding.getRoot();
     }
@@ -61,7 +69,7 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
     @Override
     protected void onAttach(@NonNull View view) {
         super.onAttach(view);
-        initGridView();
+        initRecyclerView();
         loadData(false);
     }
 
@@ -114,10 +122,21 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
         super.showContent();
     }
 
-    private void initGridView() {
+    private void initRecyclerView() {
         adapter = new CollectionsAdapter(getActivity());
         recyclerView = binding.contentView.findViewById(R.id.rv_collections);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        subscribeToCollectionItemClicked(adapter.getAdapterCollectionClickSubject());
+    }
+
+    private void subscribeToCollectionItemClicked(PublishSubject<Integer> collectionItemClickSubject) {
+        disposable.add(collectionItemClickSubject.subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe( id -> {
+                      Toast.makeText(getActivity(), String.valueOf(id), Toast.LENGTH_LONG).show();
+                  }, e -> {
+                      Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                  }));
     }
 }
