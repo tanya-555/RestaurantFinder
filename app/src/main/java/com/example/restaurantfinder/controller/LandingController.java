@@ -137,7 +137,6 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
         disposable.add(collectionItemClickSubject.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(id -> {
-                    Toast.makeText(getActivity(), String.valueOf(id), Toast.LENGTH_LONG).show();
                     collectionId = id;
                     launchListingActivity();
                 }, e -> {

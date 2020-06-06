@@ -1,6 +1,7 @@
 package com.example.restaurantfinder.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.databinding.SearchItemBinding;
 import com.example.restaurantfinder.model.SearchResponse;
 import com.example.restaurantfinder.view_holder.SearchViewHolder;
@@ -40,6 +42,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
         holder.bindData(response);
         Glide.with(context).load(response.getImage())
                 .apply(new RequestOptions().centerCrop()).into(holder.restImage);
+        int color = Color.parseColor("#".concat(response.getRatingColor()));
+        holder.tvRating.setBackgroundColor(color);
     }
 
     @Override
