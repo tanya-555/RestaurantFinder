@@ -7,7 +7,7 @@ import com.hannesdorfmann.mosby3.mvp.lce.MvpLceView;
 
 import java.util.List;
 
-public interface CollectionsContract {
+public interface LandingContract {
 
     interface Model {
         void getCollections(RequestQueue queue, int cityId, onFinishedListener listener);

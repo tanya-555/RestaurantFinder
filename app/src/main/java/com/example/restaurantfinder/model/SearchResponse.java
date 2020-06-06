@@ -1,6 +1,6 @@
 package com.example.restaurantfinder.model;
 
-public class SearchModel {
+public class SearchResponse {
 
     private String name;
     private String rating;
@@ -10,8 +10,8 @@ public class SearchModel {
     private String image;
     private String cuisines;
 
-    SearchModel(String name, String rating, String ratingColor, String contact,
-                String locality, String image, String cuisines) {
+    SearchResponse(String name, String rating, String ratingColor, String contact,
+                   String locality, String image, String cuisines) {
         this.name = name;
         this.rating = rating;
         this.ratingColor = ratingColor;
