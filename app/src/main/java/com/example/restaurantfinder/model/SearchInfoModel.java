@@ -70,7 +70,7 @@ public class SearchInfoModel implements ListingContract.Model {
             String ratingColor = rest.getJSONObject("user_rating").getString("rating_color");
             String contact = rest.getString("phone_numbers");
             String locality = rest.getJSONObject("location").getString("locality_verbose");
-            String image = rest.getString("thumb");
+            String image = rest.getString("featured_image");
             String cuisines = rest.getString("cuisines");
             searchList.add(new SearchResponse(name, rating, ratingColor, contact, locality, image, cuisines));
         }

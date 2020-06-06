@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/ll_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_10dp"
         android:layout_marginTop="@dimen/size_10dp"
         android:layout_marginEnd="@dimen/size_10dp"
@@ -24,12 +24,13 @@
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_200dp" />
+            android:layout_height="@dimen/size_200dp"/>
 
         <RelativeLayout
             android:id="@+id/rl_row1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:padding="@dimen/size_10dp">
 
             <TextView
