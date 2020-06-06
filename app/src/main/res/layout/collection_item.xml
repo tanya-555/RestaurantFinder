@@ -9,9 +9,10 @@
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_collections"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_black"
+        android:background="@drawable/collections_hover_selector"
         android:padding="@dimen/size_20dp"
         android:layout_marginTop="@dimen/size_10dp"
         android:layout_marginBottom="@dimen/size_10dp"

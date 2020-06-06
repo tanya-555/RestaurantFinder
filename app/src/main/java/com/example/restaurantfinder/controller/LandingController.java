@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 public class LandingController extends MvpLceController<LinearLayout, List<CollectionResponse>,
-                                           CollectionsContract.View, LandingPresenter> implements  CollectionsContract.View {
+        CollectionsContract.View, LandingPresenter> implements CollectionsContract.View {
 
     private static final String TAG = LandingController.class.getName();
 
@@ -132,11 +132,11 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
 
     private void subscribeToCollectionItemClicked(PublishSubject<Integer> collectionItemClickSubject) {
         disposable.add(collectionItemClickSubject.subscribeOn(Schedulers.io())
-                  .observeOn(AndroidSchedulers.mainThread())
-                  .subscribe( id -> {
-                      Toast.makeText(getActivity(), String.valueOf(id), Toast.LENGTH_LONG).show();
-                  }, e -> {
-                      Log.d(TAG, Objects.requireNonNull(e.getMessage()));
-                  }));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(id -> {
+                    Toast.makeText(getActivity(), String.valueOf(id), Toast.LENGTH_LONG).show();
+                }, e -> {
+                    Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                }));
     }
 }
