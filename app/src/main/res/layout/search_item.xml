@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="search"
+            type="com.example.restaurantfinder.model.SearchResponse" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/size_10dp"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginEnd="@dimen/size_10dp"
+        android:layout_marginBottom="@dimen/size_10dp"
+        android:background="@color/color_black"
+        android:orientation="vertical"
+        android:padding="@dimen/size_20dp">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_200dp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_row1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{search.name}"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/size_18dp"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingStart="@dimen/size_10dp"
+                android:paddingTop="@dimen/size_2dp"
+                android:paddingEnd="@dimen/size_10dp"
+                android:paddingBottom="@dimen/size_2dp"
+                android:text="@{search.rating}"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/size_10dp"
+                tools:text="5" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_row2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp">
+
+            <ImageView
+                android:id="@+id/iv_cuisine"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/dish" />
+
+            <TextView
+                android:id="@+id/tv_cuisines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
+                android:text="@{search.cuisines}"
+                android:textColor="@color/color_white"
+                android:textSize="14dp"
+                tools:text="Chinese, Indian" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_row3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp">
+
+            <ImageView
+                android:id="@+id/iv_call"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/call" />
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
+                android:text="@{search.contact}"
+                android:textColor="@color/color_white"
+                android:textSize="14dp"
+                tools:text="9898076768" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_row4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp">
+
+            <ImageView
+                android:id="@+id/iv_location"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/locate" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
+                android:text="@{search.cuisines}"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/size_10dp"
+                tools:text="Delhi" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
