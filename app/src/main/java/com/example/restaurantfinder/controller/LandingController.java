@@ -16,7 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.adapter.CollectionsAdapter;
-import com.example.restaurantfinder.contract.CollectionsContract;
+import com.example.restaurantfinder.contract.LandingContract;
 import com.example.restaurantfinder.databinding.LandingControllerBinding;
 import com.example.restaurantfinder.model.CollectionResponse;
 import com.example.restaurantfinder.presenter.LandingPresenter;
@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 public class LandingController extends MvpLceController<LinearLayout, List<CollectionResponse>,
-        CollectionsContract.View, LandingPresenter> implements CollectionsContract.View {
+        LandingContract.View, LandingPresenter> implements LandingContract.View {
 
     private static final String TAG = LandingController.class.getName();
 

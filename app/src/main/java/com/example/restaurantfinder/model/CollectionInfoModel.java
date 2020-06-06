@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.restaurantfinder.contract.CollectionsContract;
+import com.example.restaurantfinder.contract.LandingContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class CollectionInfoModel implements CollectionsContract.Model {
+public class CollectionInfoModel implements LandingContract.Model {
 
     private static final String TAG = CollectionInfoModel.class.getName();
     private static final String URL = "https://developers.zomato.com/api/v2.1/collections?city_id=";

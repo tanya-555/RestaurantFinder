@@ -1,17 +1,17 @@
 package com.example.restaurantfinder.presenter;
 
 import com.android.volley.RequestQueue;
-import com.example.restaurantfinder.contract.CollectionsContract;
+import com.example.restaurantfinder.contract.LandingContract;
 import com.example.restaurantfinder.model.CollectionInfoModel;
 import com.example.restaurantfinder.model.CollectionResponse;
 
 import java.util.List;
 
-public class LandingPresenter extends CollectionsContract.Presenter implements CollectionsContract.Model.onFinishedListener {
+public class LandingPresenter extends LandingContract.Presenter implements LandingContract.Model.onFinishedListener {
 
 
     private CollectionInfoModel model;
-    private CollectionsContract.View attachedView;
+    private LandingContract.View attachedView;
 
     public LandingPresenter() {
         model = new CollectionInfoModel();
@@ -26,7 +26,7 @@ public class LandingPresenter extends CollectionsContract.Presenter implements C
     }
 
     @Override
-    public void attachView(CollectionsContract.View view) {
+    public void attachView(LandingContract.View view) {
         super.attachView(view);
         attachedView = view;
     }
