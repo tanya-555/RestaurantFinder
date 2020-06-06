@@ -1,5 +1,6 @@
 package com.example.restaurantfinder.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.restaurantfinder.ListingActivity;
 import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.adapter.CollectionsAdapter;
 import com.example.restaurantfinder.contract.LandingContract;
@@ -44,6 +46,7 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
     private RecyclerView recyclerView;
     private List<CollectionResponse> collectionList;
     private CompositeDisposable disposable;
+    private int collectionId;
 
     public LandingController(Bundle bundle) {
         super(bundle);
@@ -135,8 +138,17 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(id -> {
                     Toast.makeText(getActivity(), String.valueOf(id), Toast.LENGTH_LONG).show();
+                    collectionId = id;
+                    launchListingActivity();
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));
                 }));
+    }
+
+    private void launchListingActivity() {
+        Intent intent = new Intent(getActivity(), ListingActivity.class);
+        intent.putExtra("city_id", cityId);
+        intent.putExtra("collection_id", collectionId);
+        startActivity(intent);
     }
 }

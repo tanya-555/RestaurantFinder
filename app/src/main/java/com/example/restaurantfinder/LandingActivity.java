@@ -76,7 +76,6 @@ public class LandingActivity extends AppCompatActivity {
         disposable.add(RxView.clicks(optionsBtn).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
                     showPopupMenu();
-                    //this.finish();
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));
                 }));
