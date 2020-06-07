@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.bluelinelabs.conductor.Conductor;
 import com.bluelinelabs.conductor.Router;
@@ -27,10 +28,12 @@ public class ListingActivity extends AppCompatActivity {
     private ImageView sortBtn;
     private CompositeDisposable disposable;
     private ListingController controller;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.listing_activity);
         router = Conductor.attachRouter(ListingActivity.this, findViewById(R.id.router), savedInstanceState);
         backBtn = findViewById(R.id.iv_back);
@@ -58,7 +61,7 @@ public class ListingActivity extends AppCompatActivity {
                 }));
         disposable.add(RxView.clicks(sortBtn).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-
+                    controller.showSortDialog(fragmentManager);
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));
                 }));

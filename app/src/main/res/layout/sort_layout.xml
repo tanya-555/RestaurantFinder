@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="@dimen/size_5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/color_black"
+    android:elevation="@dimen/size_10dp"
+    android:orientation="vertical"
+    android:padding="@dimen/size_5dp">
 
     <RelativeLayout
         android:id="@+id/rl_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/size_10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/header_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sort_by"
-            android:textSize="@dimen/size_18dp"
             android:layout_marginStart="@dimen/size_25dp"
-            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/size_25dp"
+            android:text="@string/sort_by"
             android:textColor="@color/color_white"
-            android:layout_marginLeft="@dimen/size_25dp" />
+            android:textSize="@dimen/size_18dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/iv_close"
             android:layout_width="@dimen/size_15dp"
             android:layout_height="@dimen/size_15dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/cross"
-            android:layout_marginEnd="@dimen/size_10dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/size_10dp" />
+            android:layout_marginEnd="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:src="@drawable/cross" />
 
     </RelativeLayout>
 
@@ -41,8 +44,9 @@
         android:id="@+id/rl_sort_asc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/size_10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rl_header">
 
         <ImageView
@@ -52,26 +56,26 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginEnd="@dimen/size_10dp"
-            android:src="@drawable/inc_sort"
-            android:layout_marginRight="@dimen/size_10dp" />
+            android:layout_marginRight="@dimen/size_10dp"
+            android:src="@drawable/inc_sort" />
 
         <TextView
             android:id="@+id/tv_sort_asc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/increasing_rating"
             android:layout_marginStart="@dimen/size_25dp"
-            android:textSize="@dimen/size_15dp"
+            android:layout_marginLeft="@dimen/size_25dp"
+            android:text="@string/increasing_rating"
             android:textColor="@color/color_white"
-            android:layout_marginLeft="@dimen/size_25dp" />
+            android:textSize="@dimen/size_15dp" />
 
         <RadioButton
             android:id="@+id/rb_sort_asc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:checked="true" />
 
     </RelativeLayout>
 
@@ -79,8 +83,9 @@
         android:id="@+id/rl_sort_dsc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/size_10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rl_sort_asc">
 
         <ImageView
@@ -90,26 +95,26 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginEnd="@dimen/size_10dp"
-            android:src="@drawable/dec_sort"
-            android:layout_marginRight="@dimen/size_10dp" />
+            android:layout_marginRight="@dimen/size_10dp"
+            android:src="@drawable/dec_sort" />
 
         <TextView
             android:id="@+id/tv_sort_dsc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/decreasing_rating"
             android:layout_marginStart="@dimen/size_25dp"
-            android:textSize="@dimen/size_15dp"
+            android:layout_marginLeft="@dimen/size_25dp"
+            android:text="@string/decreasing_rating"
             android:textColor="@color/color_white"
-            android:layout_marginLeft="@dimen/size_25dp" />
+            android:textSize="@dimen/size_15dp" />
 
         <RadioButton
             android:id="@+id/rb_sort_dsc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:checked="false" />
 
     </RelativeLayout>
 

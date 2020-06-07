@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.adapter.SearchAdapter;
 import com.example.restaurantfinder.contract.ListingContract;
 import com.example.restaurantfinder.databinding.ListingControllerBinding;
+import com.example.restaurantfinder.fragment.SortFragment;
 import com.example.restaurantfinder.model.SearchResponse;
 import com.example.restaurantfinder.presenter.ListingPresenter;
 import com.hannesdorfmann.mosby3.mvp.conductor.lce.MvpLceController;
@@ -27,6 +29,8 @@ import java.util.Objects;
 
 public class ListingController extends MvpLceController<LinearLayout, List<SearchResponse>,
         ListingContract.View, ListingPresenter> implements ListingContract.View {
+
+    private static final String TAG = ListingController.class.getName();
 
     private Bundle bundle;
     private int cityId;
@@ -95,5 +99,10 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
         recyclerView = binding.contentView.findViewById(R.id.rv_search_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+    }
+
+    public void showSortDialog(FragmentManager fragmentManager) {
+        SortFragment sortFragment = SortFragment.newInstance();
+        sortFragment.show(fragmentManager, TAG);
     }
 }
