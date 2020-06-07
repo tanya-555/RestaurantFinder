@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/size_5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/header_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by"
+            android:textSize="@dimen/size_18dp"
+            android:layout_marginStart="@dimen/size_25dp"
+            android:textStyle="bold"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/size_25dp" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/size_15dp"
+            android:layout_height="@dimen/size_15dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/cross"
+            android:layout_marginEnd="@dimen/size_10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size_10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sort_asc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_header">
+
+        <ImageView
+            android:id="@+id/iv_sort_asc"
+            android:layout_width="@dimen/size_15dp"
+            android:layout_height="@dimen/size_15dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="@dimen/size_10dp"
+            android:src="@drawable/inc_sort"
+            android:layout_marginRight="@dimen/size_10dp" />
+
+        <TextView
+            android:id="@+id/tv_sort_asc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/increasing_rating"
+            android:layout_marginStart="@dimen/size_25dp"
+            android:textSize="@dimen/size_15dp"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/size_25dp" />
+
+        <RadioButton
+            android:id="@+id/rb_sort_asc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sort_dsc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_sort_asc">
+
+        <ImageView
+            android:id="@+id/iv_sort_dsc"
+            android:layout_width="@dimen/size_15dp"
+            android:layout_height="@dimen/size_15dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="@dimen/size_10dp"
+            android:src="@drawable/dec_sort"
+            android:layout_marginRight="@dimen/size_10dp" />
+
+        <TextView
+            android:id="@+id/tv_sort_dsc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/decreasing_rating"
+            android:layout_marginStart="@dimen/size_25dp"
+            android:textSize="@dimen/size_15dp"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/size_25dp" />
+
+        <RadioButton
+            android:id="@+id/rb_sort_dsc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

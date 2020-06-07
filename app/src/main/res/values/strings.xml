@@ -9,4 +9,7 @@
     <string name="enter_city">Enter city</string>
     <string name="search">SEARCH</string>
     <string name="restaurant_finder">Restaurant Finder</string>
+    <string name="sort_by">SORT BY</string>
+    <string name="increasing_rating">Increasing Rating</string>
+    <string name="decreasing_rating">Decreasing Rating</string>
 </resources>
