@@ -41,8 +41,8 @@ public class SelectCityPresenter extends SelectCityContract.Presenter implements
     }
 
     @Override
-    public void onFinished(int cityId) {
-        attachedView.onDataFetched(cityId);
+    public void onFinished(int cityId, String cityName) {
+        attachedView.onDataFetched(cityId, cityName);
     }
 
     @Override

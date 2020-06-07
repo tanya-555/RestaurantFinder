@@ -11,14 +11,14 @@ public interface SelectCityContract {
 
         interface onFinishedListener {
 
-            void onFinished(int cityId);
+            void onFinished(int cityId, String cityName);
 
             void onFailure(Throwable t);
         }
     }
 
     interface View extends MvpView {
-        void onDataFetched(int cityId);
+        void onDataFetched(int cityId, String cityName);
 
         void onResponseError(Throwable t);
     }

@@ -85,12 +85,13 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
     }
 
     @Override
-    public void onDataFetched(int cityId) {
+    public void onDataFetched(int cityId, String cityName) {
         if(cityId == 0) {
             Toast.makeText(this, "No Results Found!", Toast.LENGTH_LONG).show();
         } else {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("city_id", cityId);
+            editor.putString("city_name", cityName);
             editor.apply();
             Intent intent = new Intent(SelectCityActivity.this, LandingActivity.class);
             startActivity(intent);

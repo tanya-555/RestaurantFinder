@@ -29,14 +29,18 @@ public class CityInfoModel implements SelectCityContract.Model {
                     @Override
                     public void onResponse(JSONObject response) {
                         int city_id;
+                        String city_name;
                         try {
                             if(response.getJSONArray("location_suggestions").length() == 0) {
                                 city_id = 0;
+                                city_name = "";
                             } else {
                                 city_id = response.getJSONArray("location_suggestions").
                                         getJSONObject(0).getInt("id");
+                                city_name = response.getJSONArray("location_suggestions").
+                                        getJSONObject(0).getString("name");
                             }
-                            listener.onFinished(city_id);
+                            listener.onFinished(city_id, city_name);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
