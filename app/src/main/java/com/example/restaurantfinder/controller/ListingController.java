@@ -91,8 +91,8 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     @Override
     public void setData(List<SearchResponse> data) {
         searchResponses.clear();
-        Collections.sort(data, new SortByRating());
         searchResponses.addAll(data);
+        sortData();
         adapter.setList(searchResponses);
         adapter.notifyDataSetChanged();
     }
@@ -136,7 +136,7 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     @Subscribe
     public void onSortOptionSelected(SortOptionSelectedEvent event) {
         order = event.sortOption;
-        sortData();
+        presenter.fetchData(queue, cityId, collectionId, order);
     }
 
     private void sortData() {
