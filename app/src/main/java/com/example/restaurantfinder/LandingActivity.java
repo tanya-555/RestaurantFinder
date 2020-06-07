@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,8 +36,10 @@ public class LandingActivity extends AppCompatActivity {
 
     private Router router;
     private int cityId;
+    private String cityName;
     private ImageView backBtn;
     private ImageView optionsBtn;
+    private TextView tvCityName;
     private CompositeDisposable disposable;
 
     @Override
@@ -46,17 +49,22 @@ public class LandingActivity extends AppCompatActivity {
         router = Conductor.attachRouter(LandingActivity.this, findViewById(R.id.router), savedInstanceState);
         backBtn = findViewById(R.id.iv_back);
         optionsBtn = findViewById(R.id.iv_options);
+        tvCityName = findViewById(R.id.tv_city_name);
         disposable = new CompositeDisposable();
         DaggerSharedPrefComponent.builder().sharedPrefModule(
                 new SharedPrefModule(getApplicationContext())).build().inject(this);
-        getCityId();
+        getCityDetails();
+        tvCityName.setText(cityName);
         initListener();
         launchLandingController();
     }
 
-    private void getCityId() {
+    private void getCityDetails() {
         if (sharedPreferences.contains("city_id")) {
             cityId = sharedPreferences.getInt("city_id", 0);
+        }
+        if (sharedPreferences.contains("city_name")) {
+            cityName = sharedPreferences.getString("city_name", "");
         }
     }
 

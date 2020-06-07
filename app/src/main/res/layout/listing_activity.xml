@@ -25,15 +25,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/iv_location"
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/size_5dp"
+                android:src="@drawable/location"
+                android:layout_marginLeft="@dimen/size_5dp" />
+
             <TextView
+                android:id="@+id/tv_city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/size_10dp"
-                android:text="@string/restaurant_finder"
+                android:padding="@dimen/size_5dp"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/size_15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_back"
+                app:layout_constraintStart_toEndOf="@+id/iv_location"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
