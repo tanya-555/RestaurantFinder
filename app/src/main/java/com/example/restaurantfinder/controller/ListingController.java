@@ -17,7 +17,6 @@ import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.adapter.SearchAdapter;
 import com.example.restaurantfinder.contract.ListingContract;
 import com.example.restaurantfinder.databinding.ListingControllerBinding;
-import com.example.restaurantfinder.databinding.ListingControllerBindingImpl;
 import com.example.restaurantfinder.model.SearchResponse;
 import com.example.restaurantfinder.presenter.ListingPresenter;
 import com.hannesdorfmann.mosby3.mvp.conductor.lce.MvpLceController;

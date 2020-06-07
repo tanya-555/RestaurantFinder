@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
-                android:text="@{search.cuisines}"
+                android:text="@{search.locality}"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/size_10dp"
                 tools:text="Delhi" />
