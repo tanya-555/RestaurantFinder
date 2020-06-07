@@ -21,7 +21,7 @@
 
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="@dimen/size_400dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/size_200dp" />
 
         <TextView
