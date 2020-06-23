@@ -3,8 +3,12 @@ package com.example.restaurantfinder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +25,8 @@ import com.example.restaurantfinder.presenter.SelectCityPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 import com.jakewharton.rxbinding2.view.RxView;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -37,6 +43,8 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
     private SelectCityLayoutBinding binding;
     private CompositeDisposable disposable;
     private RequestQueue queue;
+    private ArrayAdapter<String> adapter;
+    private String cities[] = {"Delhi", "Mumbai", "Hyderabad", "Patna", "Bengaluru", "Chennai", "Dehradun"};
 
     @Inject
     SharedPreferences sharedPreferences;
@@ -51,6 +59,9 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
         queue = Volley.newRequestQueue(getApplicationContext());
         DaggerSharedPrefComponent.builder().sharedPrefModule(
                 new SharedPrefModule(getApplicationContext())).build().inject(this);
+        adapter = new ArrayAdapter<>(this, R.layout.select_city_item, R.id.tv_city, cities);
+        binding.lvCities.setAdapter(adapter);
+        addTextWatcher();
         setDefaultSelectedCity();
         initListener();
     }
@@ -70,6 +81,25 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
                   }, e -> {
                       Log.d(TAG, Objects.requireNonNull(e.getMessage()));
                   }));
+    }
+
+    private void addTextWatcher() {
+        binding.etLocation.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.btnSearch.setVisibility(View.GONE);
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                binding.btnSearch.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -110,6 +140,11 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
     }
 
     private void loadData() {
+        List<String> citiesList = Arrays.asList(cities);
+        if(!citiesList.contains(binding.etLocation.getText().toString())) {
+            Toast.makeText(getBaseContext(), "Enter a valid city name!", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(TextUtils.isEmpty(binding.etLocation.getText().toString())) {
             Toast.makeText(this, "Enter a city name!", Toast.LENGTH_LONG).show();
         } else {

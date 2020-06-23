@@ -41,11 +41,19 @@
                 android:imeOptions="actionDone"
                 android:textStyle="italic" />
 
+            <ListView
+                android:id="@+id/lv_cities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/et_location"/>
+
             <Button
                 android:id="@+id/btn_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/et_location"
+                android:layout_below="@+id/lv_cities"
+                android:visibility="gone"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="@dimen/size_50dp"
                 android:background="@drawable/button_shape_selector"
