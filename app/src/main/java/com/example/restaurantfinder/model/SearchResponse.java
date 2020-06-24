@@ -9,9 +9,10 @@ public class SearchResponse {
     private String locality;
     private String image;
     private String cuisines;
+    private String url;
 
     SearchResponse(String name, String rating, String ratingColor, String contact,
-                   String locality, String image, String cuisines) {
+                   String locality, String image, String cuisines, String url) {
         this.name = name;
         this.rating = rating;
         this.ratingColor = ratingColor;
@@ -19,6 +20,7 @@ public class SearchResponse {
         this.locality = locality;
         this.image = image;
         this.cuisines = cuisines;
+        this.url = url;
     }
 
     public String getName() {
@@ -47,5 +49,9 @@ public class SearchResponse {
 
     public String getCuisines() {
         return cuisines;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

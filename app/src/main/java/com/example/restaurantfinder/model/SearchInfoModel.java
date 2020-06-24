@@ -72,7 +72,8 @@ public class SearchInfoModel implements ListingContract.Model {
             String locality = rest.getJSONObject("location").getString("locality_verbose");
             String image = rest.getString("featured_image");
             String cuisines = rest.getString("cuisines");
-            searchList.add(new SearchResponse(name, rating, ratingColor, contact, locality, image, cuisines));
+            String url = rest.getString("url");
+            searchList.add(new SearchResponse(name, rating, ratingColor, contact, locality, image, cuisines, url));
         }
     }
 }
