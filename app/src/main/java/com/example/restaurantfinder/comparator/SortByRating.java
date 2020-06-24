@@ -8,6 +8,15 @@ public class SortByRating implements Comparator<SearchResponse> {
 
     @Override
     public int compare(SearchResponse o1, SearchResponse o2) {
-        return Integer.valueOf(o1.getRating())-Integer.valueOf(o2.getRating());
+        double val = Double.valueOf(o1.getRating()) - Double.valueOf(o2.getRating());
+        int res;
+        if (val > 0) {
+            res = 1;
+        } else if (val < 0) {
+            res = -1;
+        } else {
+            res = 0;
+        }
+        return res;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.restaurantfinder.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.restaurantfinder.DetailsActivity;
 import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.adapter.SearchAdapter;
+import com.example.restaurantfinder.comparator.SortByRating;
 import com.example.restaurantfinder.contract.ListingContract;
 import com.example.restaurantfinder.databinding.ListingControllerBinding;
 import com.example.restaurantfinder.event.SortOptionSelectedEvent;
@@ -29,9 +33,13 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 public class ListingController extends MvpLceController<LinearLayout, List<SearchResponse>,
         ListingContract.View, ListingPresenter> implements ListingContract.View {
@@ -47,6 +55,8 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     private int collectionId;
     private ListingControllerBinding binding;
     private String order = "asc";
+    private CompositeDisposable disposable;
+    private String searchUrl;
 
     public ListingController(Bundle bundle) {
         super(bundle);
@@ -61,6 +71,7 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
         collectionId = bundle.getInt("collection_id");
         searchResponses = new ArrayList<>();
         registerEventBus();
+        disposable = new CompositeDisposable();
         queue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
         return binding.getRoot();
     }
@@ -107,6 +118,7 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
         recyclerView = binding.contentView.findViewById(R.id.rv_search_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        subscribeToAdapterItemClicked(adapter.getAdapterSearchClickSubject());
     }
 
     public void showSortDialog(FragmentManager fragmentManager) {
@@ -146,21 +158,22 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
             Collections.sort(searchResponses, Collections.reverseOrder(new SortByRating()));
         }
     }
-}
 
-//Comparator to sort by ratings
-class SortByRating implements Comparator<SearchResponse> {
-    @Override
-    public int compare(SearchResponse o1, SearchResponse o2) {
-        double val = Double.valueOf(o1.getRating()) - Double.valueOf(o2.getRating());
-        int res;
-        if (val > 0) {
-            res = 1;
-        } else if (val < 0) {
-            res = -1;
-        } else {
-            res = 0;
-        }
-        return res;
+    private void subscribeToAdapterItemClicked(PublishSubject<String> searchItemClickSubject) {
+        disposable.add(searchItemClickSubject.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(url -> {
+                    searchUrl = url;
+                    launchDetailsActivity();
+                }, e -> {
+                    Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                }));
+    }
+
+    private void launchDetailsActivity() {
+        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+        intent.putExtra("search_url", searchUrl);
+        startActivity(intent);
     }
 }
+
