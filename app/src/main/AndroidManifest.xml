@@ -27,6 +27,7 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".LandingActivity" />
         <activity android:name=".ListingActivity" />
+        <activity android:name=".DetailsActivity" />
     </application>
 
 </manifest>
