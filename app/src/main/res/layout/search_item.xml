@@ -135,12 +135,40 @@
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginLeft="60dp"
+                android:layout_marginStart="@dimen/size_60dp"
+                android:layout_marginLeft="@dimen/size_60dp"
                 android:text="@{search.locality}"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/size_10dp"
                 tools:text="Delhi" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_row5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp">
+
+            <TextView
+                android:id="@+id/tv_locate"
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                android:text="@string/locate"
+                android:textColor="@color/color_toolbar_bg"
+                android:textSize="@dimen/size_10dp"/>
+
+            <TextView
+                android:id="@+id/tv_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_60dp"
+                android:layout_marginLeft="@dimen/size_60dp"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/size_10dp"
+                android:layout_alignParentEnd="true"
+                android:text="@string/view_url"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 

@@ -13,4 +13,6 @@
     <string name="increasing_rating">Increasing Rating</string>
     <string name="decreasing_rating">Decreasing Rating</string>
     <string name="title_activity_maps">Map</string>
+    <string name="locate">Locate</string>
+    <string name="view_url">View URL</string>
 </resources>
