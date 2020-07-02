@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.restaurantfinder.DetailsActivity;
+import com.example.restaurantfinder.MapsActivity;
 import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.adapter.SearchAdapter;
 import com.example.restaurantfinder.comparator.SortByRating;
@@ -45,6 +46,8 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
         ListingContract.View, ListingPresenter> implements ListingContract.View {
 
     private static final String TAG = ListingController.class.getName();
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
 
     private Bundle bundle;
     private int cityId;
@@ -119,6 +122,7 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         subscribeToAdapterItemClicked(adapter.getAdapterSearchClickSubject());
+        subscribeToAdapterItemLocateClickSubject(adapter.getAdapterItemLocateClickSubject());
     }
 
     public void showSortDialog(FragmentManager fragmentManager) {
@@ -170,9 +174,26 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
                 }));
     }
 
+    private void subscribeToAdapterItemLocateClickSubject(PublishSubject<SearchResponse> locateClickSubject) {
+        disposable.add(locateClickSubject.subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(searchResponse -> {
+                      launchMapActivity(searchResponse);
+                  }, e -> {
+                      Log.d(TAG, Objects.requireNonNull(e.getMessage()));
+                  }));
+    }
+
     private void launchDetailsActivity() {
         Intent intent = new Intent(getActivity(), DetailsActivity.class);
         intent.putExtra("search_url", searchUrl);
+        startActivity(intent);
+    }
+
+    private void launchMapActivity(SearchResponse searchResponse) {
+        Intent intent = new Intent(getActivity(), MapsActivity.class);
+        intent.putExtra(LATITUDE, searchResponse.getLatitude());
+        intent.putExtra(LONGITUDE, searchResponse.getLongitude());
         startActivity(intent);
     }
 }

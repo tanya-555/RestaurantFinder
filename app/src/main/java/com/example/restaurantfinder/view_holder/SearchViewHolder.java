@@ -13,12 +13,16 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
     private SearchItemBinding binding;
     public ImageView restImage;
     public TextView tvRating;
+    public TextView tvLocate;
+    public TextView tvViewUrl;
 
     public SearchViewHolder(SearchItemBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
         restImage = binding.ivImage;
         tvRating = binding.tvRating;
+        tvLocate = binding.tvLocate;
+        tvViewUrl = binding.tvUrl;
     }
 
     public void bindData(SearchResponse model) {

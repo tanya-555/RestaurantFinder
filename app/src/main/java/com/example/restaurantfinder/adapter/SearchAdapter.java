@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.restaurantfinder.R;
 import com.example.restaurantfinder.databinding.SearchItemBinding;
 import com.example.restaurantfinder.model.SearchResponse;
 import com.example.restaurantfinder.view_holder.SearchViewHolder;
@@ -31,11 +30,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
     private SearchItemBinding binding;
     private List<SearchResponse> searchList;
     private PublishSubject<String> adapterSearchClickSubject;
+    private PublishSubject<SearchResponse> adapterItemLocateClickSubject;
 
     public SearchAdapter(Context context) {
         this.context = context;
         searchList = new ArrayList<>();
         adapterSearchClickSubject = PublishSubject.create();
+        adapterItemLocateClickSubject = PublishSubject.create();
     }
 
     @NonNull
@@ -53,9 +54,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
                 .apply(new RequestOptions().centerCrop()).into(holder.restImage);
         int color = Color.parseColor("#".concat(response.getRatingColor()));
         holder.tvRating.setBackgroundColor(color);
-        RxView.clicks(holder.itemView).observeOn(AndroidSchedulers.mainThread())
+        RxView.clicks(holder.tvViewUrl).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
                     adapterSearchClickSubject.onNext(response.getUrl());
+                }, e -> {
+                    Log.d(TAG, e.getMessage());
+                });
+        RxView.clicks(holder.tvLocate).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    adapterItemLocateClickSubject.onNext(response);
                 }, e -> {
                     Log.d(TAG, e.getMessage());
                 });
@@ -72,5 +79,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     public PublishSubject<String > getAdapterSearchClickSubject() {
         return adapterSearchClickSubject;
+    }
+
+    public PublishSubject<SearchResponse> getAdapterItemLocateClickSubject() {
+        return adapterItemLocateClickSubject;
     }
 }
