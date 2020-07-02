@@ -10,9 +10,11 @@ public class SearchResponse {
     private String image;
     private String cuisines;
     private String url;
+    private String latitude;
+    private String longitude;
 
     SearchResponse(String name, String rating, String ratingColor, String contact,
-                   String locality, String image, String cuisines, String url) {
+                   String locality, String image, String cuisines, String url, String latitude, String longitude) {
         this.name = name;
         this.rating = rating;
         this.ratingColor = ratingColor;
@@ -21,6 +23,8 @@ public class SearchResponse {
         this.image = image;
         this.cuisines = cuisines;
         this.url = url;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
@@ -53,5 +57,13 @@ public class SearchResponse {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 }
