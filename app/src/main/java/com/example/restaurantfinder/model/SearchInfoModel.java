@@ -73,7 +73,10 @@ public class SearchInfoModel implements ListingContract.Model {
             String image = rest.getString("featured_image");
             String cuisines = rest.getString("cuisines");
             String url = rest.getString("url");
-            searchList.add(new SearchResponse(name, rating, ratingColor, contact, locality, image, cuisines, url));
+            String latitude = rest.getJSONObject("location").getString("latitude");
+            String longitude = rest.getJSONObject("location").getString("longitude");
+            searchList.add(new SearchResponse(name, rating, ratingColor, contact,
+                                    locality, image, cuisines, url, latitude, longitude));
         }
     }
 }
