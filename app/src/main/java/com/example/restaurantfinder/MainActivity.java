@@ -25,6 +25,11 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String IS_LOGIN = "is_login";
+    private static final String MOBILE = "mobile";
+    private static final String VALID_MOBILE = "Enter a valid mobile number";
+    private static final String VERIFICATION_COMPLETE = "Verification completed";
+
     ActivityMainBinding binding;
     private CompositeDisposable disposable;
     private static final String TAG = MainActivity.class.getName();
@@ -47,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSharedPreferences() {
-        if (!sharedPreferences.contains("is_login")) {
+        if (!sharedPreferences.contains(IS_LOGIN)) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("is_login", false);
+            editor.putBoolean(IS_LOGIN, false);
             editor.apply();
         }
     }
@@ -65,25 +70,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkInputValidity() {
-        if(!TextUtils.isEmpty(binding.tvMobile.getText().toString()) && binding.tvMobile.getText().toString().length()==10) {
+        if (!TextUtils.isEmpty(binding.tvMobile.getText().toString()) && binding.tvMobile.getText().toString().length() == 10) {
             Intent intent = new Intent(MainActivity.this, OTPActivity.class);
-            intent.putExtra("mobile", binding.tvMobile.getText().toString());
+            intent.putExtra(MOBILE, binding.tvMobile.getText().toString());
             startActivityForResult(intent, REQUEST_CODE);
         } else {
-            Toast.makeText(this, "Enter a valid mobile number", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, VALID_MOBILE, Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             assert data != null;
             boolean otpVerification = Objects.requireNonNull(data.getExtras()).getBoolean("isOTPVerified");
-            if(otpVerification) {
-                Log.d(TAG, "Verification completed");
+            if (otpVerification) {
+                Log.d(TAG, VERIFICATION_COMPLETE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("is_login", true);
+                editor.putBoolean(IS_LOGIN, true);
                 editor.apply();
                 Intent intent = new Intent(MainActivity.this, SelectCityActivity.class);
                 startActivity(intent);
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void isLoggedIn() {
-        if(sharedPreferences.getBoolean("is_login", false)) {
+        if (sharedPreferences.getBoolean(IS_LOGIN, false)) {
             Intent intent = new Intent(MainActivity.this, SelectCityActivity.class);
             startActivity(intent);
             finish();

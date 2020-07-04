@@ -11,6 +11,7 @@ import dagger.Provides;
 @Module
 public class SharedPrefModule {
 
+    private static final String MY_PREFERENCE = "myPref";
     private Context context;
 
     public SharedPrefModule(Context context) {
@@ -26,6 +27,6 @@ public class SharedPrefModule {
     @Singleton
     @Provides
     public SharedPreferences provideSharedPreferences() {
-        return context.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        return context.getSharedPreferences(MY_PREFERENCE, Context.MODE_PRIVATE);
     }
 }

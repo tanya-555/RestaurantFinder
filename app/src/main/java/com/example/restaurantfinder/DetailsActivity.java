@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bluelinelabs.conductor.Conductor;
-import com.bluelinelabs.conductor.Router;
 import com.example.restaurantfinder.di.DaggerSharedPrefComponent;
 import com.example.restaurantfinder.di.SharedPrefModule;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -29,6 +27,8 @@ public class DetailsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     private static final String TAG = DetailsActivity.class.getName();
+    private static final String SEARCH_URL = "search_url";
+    private static final String CITY_NAME = "city_name";
 
     private ImageView backBtn;
     private TextView tvCityName;
@@ -49,12 +49,12 @@ public class DetailsActivity extends AppCompatActivity {
         getCityName();
         tvCityName.setText(cityName);
         initListener();
-        webView.loadUrl(getIntent().getStringExtra("search_url"));
+        webView.loadUrl(getIntent().getStringExtra(SEARCH_URL));
     }
 
     private void getCityName() {
-        if (sharedPreferences.contains("city_name")) {
-            cityName = sharedPreferences.getString("city_name", "");
+        if (sharedPreferences.contains(CITY_NAME)) {
+            cityName = sharedPreferences.getString(CITY_NAME, "");
         }
     }
 

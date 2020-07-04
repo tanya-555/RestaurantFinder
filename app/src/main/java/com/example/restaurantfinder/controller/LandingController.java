@@ -36,6 +36,8 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
         LandingContract.View, LandingPresenter> implements LandingContract.View {
 
     private static final String TAG = LandingController.class.getName();
+    private static final String CITY_ID = "city_id";
+    private static final String COLLECTION_ID = "collection_id";
 
     private Bundle bundle;
     private LandingControllerBinding binding;
@@ -61,7 +63,7 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         binding = LandingControllerBinding.inflate(inflater, container, false);
-        cityId = bundle.getInt("city_id");
+        cityId = bundle.getInt(CITY_ID);
         collectionList = new ArrayList<>();
         disposable = new CompositeDisposable();
         queue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
@@ -145,8 +147,8 @@ public class LandingController extends MvpLceController<LinearLayout, List<Colle
 
     private void launchListingActivity() {
         Intent intent = new Intent(getActivity(), ListingActivity.class);
-        intent.putExtra("city_id", cityId);
-        intent.putExtra("collection_id", collectionId);
+        intent.putExtra(CITY_ID, cityId);
+        intent.putExtra(COLLECTION_ID, collectionId);
         startActivity(intent);
     }
 }

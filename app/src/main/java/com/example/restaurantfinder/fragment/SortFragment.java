@@ -27,6 +27,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class SortFragment extends BottomSheetDialogFragment {
 
     private static final String TAG = SortFragment.class.getName();
+    private static final String ASCENDING = "asc";
+    private static final String DESCENDING = "desc";
 
     private CompositeDisposable disposable;
     private ImageView ivClose;
@@ -64,18 +66,18 @@ public class SortFragment extends BottomSheetDialogFragment {
                   }));
         disposable.add(RxView.clicks(rlSortAsc).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    order = "asc";
+                    order = ASCENDING;
                     setSortOption();
-                    EventBus.getDefault().post(new SortOptionSelectedEvent("asc"));
+                    EventBus.getDefault().post(new SortOptionSelectedEvent(ASCENDING));
                     this.dismiss();
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));
                 }));
         disposable.add(RxView.clicks(rlSortDsc).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    order = "desc";
+                    order = DESCENDING;
                     setSortOption();
-                    EventBus.getDefault().post(new SortOptionSelectedEvent("desc"));
+                    EventBus.getDefault().post(new SortOptionSelectedEvent(DESCENDING));
                     this.dismiss();
                 }, e -> {
                     Log.d(TAG, Objects.requireNonNull(e.getMessage()));
@@ -89,10 +91,10 @@ public class SortFragment extends BottomSheetDialogFragment {
     }
 
     private void setSortOption() {
-        if("asc".equals(order)) {
+        if(ASCENDING.equals(order)) {
             rbSortAsc.setChecked(true);
             rbSortDsc.setChecked(false);
-        } else if("desc".equals(order)) {
+        } else if(DESCENDING.equals(order)) {
             rbSortAsc.setChecked(false);
             rbSortDsc.setChecked(true);
         }

@@ -48,6 +48,11 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     private static final String TAG = ListingController.class.getName();
     private static final String LATITUDE = "latitude";
     private static final String LONGITUDE = "longitude";
+    private static final String ASCENDING = "asc";
+    private static final String DESCENDING = "desc";
+    private static final String SEARCH_URL = "search_url";
+    private static final String CITY_ID = "city_id";
+    private static final String COLLECTION_ID = "collection_id";
 
     private Bundle bundle;
     private int cityId;
@@ -57,7 +62,7 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     private List<SearchResponse> searchResponses;
     private int collectionId;
     private ListingControllerBinding binding;
-    private String order = "asc";
+    private String order = ASCENDING;
     private CompositeDisposable disposable;
     private String searchUrl;
 
@@ -70,8 +75,8 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     @Override
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         binding = DataBindingUtil.inflate(inflater, R.layout.listing_controller, null, false);
-        cityId = bundle.getInt("city_id");
-        collectionId = bundle.getInt("collection_id");
+        cityId = bundle.getInt(CITY_ID);
+        collectionId = bundle.getInt(COLLECTION_ID);
         searchResponses = new ArrayList<>();
         registerEventBus();
         disposable = new CompositeDisposable();
@@ -156,9 +161,9 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
     }
 
     private void sortData() {
-        if("asc".equals(order)) {
+        if(ASCENDING.equals(order)) {
             Collections.sort(searchResponses, new SortByRating());
-        } else if("desc".equals(order)) {
+        } else if(DESCENDING.equals(order)) {
             Collections.sort(searchResponses, Collections.reverseOrder(new SortByRating()));
         }
     }
@@ -186,7 +191,7 @@ public class ListingController extends MvpLceController<LinearLayout, List<Searc
 
     private void launchDetailsActivity() {
         Intent intent = new Intent(getActivity(), DetailsActivity.class);
-        intent.putExtra("search_url", searchUrl);
+        intent.putExtra(SEARCH_URL, searchUrl);
         startActivity(intent);
     }
 

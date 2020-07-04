@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +29,9 @@ import io.reactivex.disposables.CompositeDisposable;
 public class LandingActivity extends AppCompatActivity {
 
     private static final String TAG = LandingActivity.class.getName();
+    private static final String CITY_ID = "city_id";
+    private static final String CITY_NAME = "city_name";
+    private static final String LOGOUT = "Logout";
 
     @Inject
     SharedPreferences sharedPreferences;
@@ -60,17 +62,17 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     private void getCityDetails() {
-        if (sharedPreferences.contains("city_id")) {
-            cityId = sharedPreferences.getInt("city_id", 0);
+        if (sharedPreferences.contains(CITY_ID)) {
+            cityId = sharedPreferences.getInt(CITY_ID, 0);
         }
-        if (sharedPreferences.contains("city_name")) {
-            cityName = sharedPreferences.getString("city_name", "");
+        if (sharedPreferences.contains(CITY_NAME)) {
+            cityName = sharedPreferences.getString(CITY_NAME, "");
         }
     }
 
     private void launchLandingController() {
         Bundle bundle = new Bundle();
-        bundle.putInt("city_id", cityId);
+        bundle.putInt(CITY_ID, cityId);
         router.setRoot(RouterTransaction.with(new LandingController(bundle)));
     }
 
@@ -98,16 +100,13 @@ public class LandingActivity extends AppCompatActivity {
     private void showPopupMenu() {
         PopupMenu menu = new PopupMenu(LandingActivity.this, optionsBtn);
         menu.getMenuInflater().inflate(R.menu.menu, menu.getMenu());
-        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if ("Logout".contentEquals(item.getTitle())) {
-                    clearPreferences();
-                    goToMainActivity();
-                    LandingActivity.this.finish();
-                }
-                return true;
+        menu.setOnMenuItemClickListener(item -> {
+            if (LOGOUT.contentEquals(item.getTitle())) {
+                clearPreferences();
+                goToMainActivity();
+                LandingActivity.this.finish();
             }
+            return true;
         });
         menu.show();
     }

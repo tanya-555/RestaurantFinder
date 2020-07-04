@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -28,6 +29,13 @@ import io.reactivex.disposables.CompositeDisposable;
 public class OTPActivity extends AppCompatActivity {
 
     private static final String TAG = OTPActivity.class.getName();
+    private static final String MOBILE = "mobile";
+    private static final String ENTER_OTP = "Please enter OTP!";
+    private static final String VERIFICATION_CODE_SENT = "Verification code sent";
+    private static final String VERIFICATION_IN_PROGRESS = "Verification in progress..";
+    private static final String IS_OTP_VERIFIED = "isOTPVerified";
+    private static final String SOMETHING_WENT_WRONG = "Something went wrong...Try again";
+    private static final String INVALID_CODE = "Invalid code entered...";
 
     private OtpActivityBinding binding;
     private FirebaseAuth firebaseAuth;
@@ -45,7 +53,7 @@ public class OTPActivity extends AppCompatActivity {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.otp_activity, null, false);
         setContentView(binding.getRoot());
         initListener();
-        mobile = getIntent().getStringExtra("mobile");
+        mobile = getIntent().getStringExtra(MOBILE);
         sendVerificationCode(mobile);
     }
 
@@ -70,7 +78,7 @@ public class OTPActivity extends AppCompatActivity {
 
     private void handleVerifySelection() {
         if (TextUtils.isEmpty(binding.tvOtp.getText().toString())) {
-            Toast.makeText(this, "Please enter OTP!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, ENTER_OTP, Toast.LENGTH_LONG).show();
         } else {
             verifyVerificationCode(verificationId);
         }
@@ -89,7 +97,7 @@ public class OTPActivity extends AppCompatActivity {
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
                 verifyCallbacks);
-        Toast.makeText(this, "Verification code sent", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, VERIFICATION_CODE_SENT, Toast.LENGTH_LONG).show();
     }
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verifyCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -125,7 +133,7 @@ public class OTPActivity extends AppCompatActivity {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
             progressDialog.setCancelable(false);
-            progressDialog.setTitle("Verification in progress..");
+            progressDialog.setTitle(VERIFICATION_IN_PROGRESS);
         }
         progressDialog.show();
     }
@@ -143,14 +151,14 @@ public class OTPActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         isOTPVerified = true;
                         Intent intent = getIntent();
-                        intent.putExtra("isOTPVerified", isOTPVerified);
+                        intent.putExtra(IS_OTP_VERIFIED, isOTPVerified);
                         setResult(RESULT_OK, intent);
                         finish();
                     } else {
-                        String message = "Something went wrong...Try again";
+                        String message = SOMETHING_WENT_WRONG;
 
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            message = "Invalid code entered...";
+                            message = INVALID_CODE;
                         }
                         Toast.makeText(OTPActivity.this, message, Toast.LENGTH_LONG).show();
                     }

@@ -28,6 +28,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class ListingActivity extends AppCompatActivity {
 
     private static final String TAG = ListingActivity.class.getName();
+    private static final String CITY_NAME = "city_name";
 
     private Router router;
     private ImageView backBtn;
@@ -90,8 +91,8 @@ public class ListingActivity extends AppCompatActivity {
     }
 
     private void getCityName() {
-        if (sharedPreferences.contains("city_name")) {
-            cityName = sharedPreferences.getString("city_name", "");
+        if (sharedPreferences.contains(CITY_NAME)) {
+            cityName = sharedPreferences.getString(CITY_NAME, "");
         }
     }
 }

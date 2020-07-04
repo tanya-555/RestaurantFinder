@@ -39,6 +39,12 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
         implements SelectCityContract.View {
 
     private static final String TAG = SelectCityActivity.class.getName();
+    private static final String CITY_ID = "city_id";
+    private static final String CITY_NAME = "city_name";
+    private static final String SELECTED_CITY = "selected_city";
+    private static final String VALID_CITY_NAME = "Enter a valid city name!";
+    private static final String ENTER_CITY_NAME = "Enter a city name!";
+    private static final String NO_RESULTS_FOUND = "No Results Found!";
 
     private SelectCityLayoutBinding binding;
     private CompositeDisposable disposable;
@@ -67,8 +73,8 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
     }
 
     private void setDefaultSelectedCity() {
-        if(sharedPreferences.contains("selected_city")) {
-            binding.etLocation.setText(sharedPreferences.getString("selected_city",""));
+        if(sharedPreferences.contains(SELECTED_CITY)) {
+            binding.etLocation.setText(sharedPreferences.getString(SELECTED_CITY,""));
         }
     }
 
@@ -117,11 +123,11 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
     @Override
     public void onDataFetched(int cityId, String cityName) {
         if(cityId == 0) {
-            Toast.makeText(this, "No Results Found!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, NO_RESULTS_FOUND, Toast.LENGTH_LONG).show();
         } else {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("city_id", cityId);
-            editor.putString("city_name", cityName);
+            editor.putInt(CITY_ID, cityId);
+            editor.putString(CITY_NAME, cityName);
             editor.apply();
             Intent intent = new Intent(SelectCityActivity.this, LandingActivity.class);
             startActivity(intent);
@@ -142,14 +148,14 @@ public class SelectCityActivity extends MvpActivity<SelectCityContract.View, Sel
     private void loadData() {
         List<String> citiesList = Arrays.asList(cities);
         if(!citiesList.contains(binding.etLocation.getText().toString())) {
-            Toast.makeText(getBaseContext(), "Enter a valid city name!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), VALID_CITY_NAME, Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(binding.etLocation.getText().toString())) {
-            Toast.makeText(this, "Enter a city name!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, ENTER_CITY_NAME, Toast.LENGTH_LONG).show();
         } else {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("selected_city", binding.etLocation.getText().toString());
+            editor.putString(SELECTED_CITY, binding.etLocation.getText().toString());
             editor.apply();
             getPresenter().fetchData(queue, binding.etLocation.getText().toString());
         }
