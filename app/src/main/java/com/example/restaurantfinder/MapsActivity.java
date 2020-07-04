@@ -15,6 +15,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static final String LATITUDE = "latitude";
     private static final String LONGITUDE = "longitude";
+    private static final String LOCATION = "location";
 
     private GoogleMap mMap;
     private String latitude;
@@ -44,11 +45,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        //Add marker at specified latitude and longitude
         latitude = getIntent().getStringExtra(LATITUDE);
         longitude = getIntent().getStringExtra(LONGITUDE);
         LatLng location = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
-        mMap.addMarker(new MarkerOptions().position(location).title("Marker in Sydney"));
+        mMap.addMarker(new MarkerOptions().position(location).title(LOCATION));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15),2000,null);
     }
 }
