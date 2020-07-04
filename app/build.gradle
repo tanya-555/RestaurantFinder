@@ -70,4 +70,10 @@ dependencies {
 
     //for google play services
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    //for google maps direction api
+    implementation 'com.google.maps:google-maps-services:0.1.20'
+
+    //for PolyUtil and other Google map utilities to decode and encode poly lines
+    implementation 'com.google.maps.android:android-maps-utils:2.0.1'
 }
