@@ -28,26 +28,26 @@
             <ImageView
                 android:id="@+id/iv_image"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_200dp"/>
+                android:layout_height="@dimen/size_200dp" />
 
             <TextView
                 android:id="@+id/tv_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/size_5dp"
                 android:layout_marginTop="@dimen/size_5dp"
+                android:layout_marginEnd="@dimen/size_5dp"
+                android:layout_marginRight="@dimen/size_5dp"
+                android:background="@drawable/rating_shape"
                 android:paddingStart="@dimen/size_10dp"
                 android:paddingTop="@dimen/size_2dp"
                 android:paddingEnd="@dimen/size_10dp"
                 android:paddingBottom="@dimen/size_2dp"
                 android:text="@{search.rating}"
-                android:background="@drawable/rating_shape"
                 android:textColor="@color/color_white"
-                android:textStyle="bold"
                 android:textSize="@dimen/size_10dp"
-                tools:text="5"
-                android:layout_marginRight="@dimen/size_5dp" />
+                android:textStyle="bold"
+                tools:text="5" />
 
         </FrameLayout>
 
@@ -152,23 +152,27 @@
 
             <TextView
                 android:id="@+id/tv_locate"
-                android:layout_width="@dimen/size_30dp"
-                android:layout_height="@dimen/size_30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/tv_listing_screen"
+                android:padding="@dimen/size_8dp"
                 android:text="@string/locate"
-                android:textColor="@color/color_toolbar_bg"
-                android:textSize="@dimen/size_10dp"/>
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/size_10dp" />
 
             <TextView
                 android:id="@+id/tv_url"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size_60dp"
-                android:layout_marginLeft="@dimen/size_60dp"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/size_10dp"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/tv_listing_screen"
+                android:padding="@dimen/size_8dp"
                 android:text="@string/view_url"
-                android:layout_alignParentRight="true" />
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/size_10dp" />
 
         </RelativeLayout>
 
