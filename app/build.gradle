@@ -11,6 +11,7 @@ android {
         applicationId "com.example.restaurantfinder"
         minSdkVersion 16
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -76,4 +77,9 @@ dependencies {
 
     //for PolyUtil and other Google map utilities to decode and encode poly lines
     implementation 'com.google.maps.android:android-maps-utils:2.0.1'
+
+    //for Location Services
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 }
