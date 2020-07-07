@@ -15,10 +15,10 @@
         android:id="@+id/btn_get_directions"
         android:layout_width="@dimen/size_50dp"
         android:layout_height="@dimen/size_50dp"
-        android:layout_gravity="right"
+        android:layout_gravity="left"
         android:src="@drawable/get_direction"
         android:backgroundTint="@color/color_toolbar_bg"
         android:layout_marginTop="@dimen/size_10dp"
-        android:layout_marginRight="@dimen/size_10dp" />
+        android:layout_marginLeft="@dimen/size_10dp" />
 
 </FrameLayout>
