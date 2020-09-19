@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hannesdorfmann.mosby3:viewstate:3.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1748c06feb25ba65584f51a9567a804e/jetified-viewstate-3.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1748c06feb25ba65584f51a9567a804e/jetified-viewstate-3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1748c06feb25ba65584f51a9567a804e/jetified-viewstate-3.1.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hannesdorfmann.mosby3/viewstate/3.1.0/d0584692aa096659fd314fba00cbfacb36def8e6/viewstate-3.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hannesdorfmann.mosby3/viewstate/3.1.0/6573b6eca41703da04815fa811a3bf3a910c0923/viewstate-3.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

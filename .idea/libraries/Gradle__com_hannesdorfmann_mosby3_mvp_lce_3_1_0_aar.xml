@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hannesdorfmann.mosby3:mvp-lce:3.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/79f5c363bad4e5736d0bf533a7a5d854/jetified-mvp-lce-3.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/79f5c363bad4e5736d0bf533a7a5d854/jetified-mvp-lce-3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/79f5c363bad4e5736d0bf533a7a5d854/jetified-mvp-lce-3.1.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hannesdorfmann.mosby3/mvp-lce/3.1.0/a58a31f010fb0feaff3bafa590b565467f5d07ce/mvp-lce-3.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hannesdorfmann.mosby3/mvp-lce/3.1.0/3b4f2ef653ab30dc6d846c70a288ed8824f214c1/mvp-lce-3.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
